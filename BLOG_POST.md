@@ -1,10 +1,16 @@
 # Trying Jev on a small classification benchmark
 
-I wanted to see how Jev compares with a small LLM when the job is simply to put text into the right category.
+Jev has been all over my social media feeds lately, and I wanted to see how it performs for myself. So I compared it with a small LLM on a straightforward job: putting text into the right category.
 
 A typical generative LLM builds its answer one token at a time. Jev takes a different approach: you provide the possible answers, and it returns a decision with probabilities. [TypeSafe says](https://docs.typesafe.ai/introduction) it can evaluate independent questions in parallel. Its underlying neural architecture isn't fully disclosed, so that's a description of its documented behaviour.
 
-I compared Jev 1.13.0 with GPT-4o mini's July 2024 version on 1,250 texts. Both received the same inputs and category descriptions, with no worked examples. The tasks covered news topics, question types, and user intentions.
+I compared Jev 1.13.0 with GPT-4o mini's July 2024 version on 1,250 texts. Both received the same inputs and category descriptions, with no worked examples. The tasks covered news topics, question types, and user intentions:
+
+- **News topics (AG News):** Read an article's title and short description, then choose world news, sports, business, or science and technology. I used 400 examples, with 100 from each category. The decision is about the article's main subject, which can be tricky when, say, a technology company makes business news.
+- **Question types (TREC):** Read a question and identify the kind of answer it asks for: a person or group, a place, a number, a description or explanation, an abbreviation or its expansion, or an entity such as an animal or object. I used all 500 questions in the test set. Dates and distances both count as numbers here.
+- **User intentions (SNIPS):** Read a short request and choose among seven actions: play music, add music to a playlist, book a restaurant, check the weather, rate a book, find a creative work such as a film or song, or find movie showtimes. I used 350 requests, with 50 per action. This is the kind of decision a voice assistant might make before handling a request.
+
+Each text already had a category assigned by its dataset, which I used to score the models' choices.
 
 | Task | Jev accuracy | GPT-4o mini accuracy |
 |---|---:|---:|
