@@ -1,0 +1,12 @@
+.venv/
+.env
+.env.*
+!.env.example
+__pycache__/
+*.pyc
+*.lock
+data-small/
+results-small/
+data-benchmarks/_sources/
+data-benchmarks/_pre_inference_draft/
+.DS_Store
